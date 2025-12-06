@@ -11,9 +11,9 @@ Aplikasi Flutter untuk manajemen inventaris buku dengan backend CodeIgniter 4.
 | Shift Asal | A |
 | Shift Baru | C |
 
-## Video Demo Aplikasi
+## Demo Aplikasi
 
-Video demo aplikasi dapat dilihat di file: `Responsi 2 Mobile Paket 3 H1D023021 - Google Chrome 2025-12-06 22-07-42.mp4`
+![Demo Aplikasi](demo.gif)
 
 ## Spesifikasi API
 
@@ -388,7 +388,3 @@ Import `database.sql` ke MySQL
 | State Management | StatefulWidget |
 | HTTP Client | http package |
 | Local Storage | SharedPreferences |
-
----
-
-Dibuat oleh Zaizafun Hanifah Zainnur Hanun (H1D023021)
