@@ -4,10 +4,12 @@ Aplikasi Flutter untuk manajemen inventaris buku dengan backend CodeIgniter 4.
 
 ## Informasi Mahasiswa
 
-- **Nama**: Zaizafun Hanifah Zainnur Hanun
-- **NIM**: H1D023021
-- **Shift Asal**: A
-- **Shift Baru**: C
+| Atribut | Nilai |
+|---------|-------|
+| Nama | Zaizafun Hanifah Zainnur Hanun |
+| NIM | H1D023021 |
+| Shift Asal | A |
+| Shift Baru | C |
 
 ## Video Demo Aplikasi
 
@@ -20,9 +22,9 @@ Aplikasi ini menggunakan backend CodeIgniter 4 dengan spesifikasi API sebagai be
 ### Endpoints
 
 #### 1. Registrasi Member
-- **Method**: POST
+- **Method**: `POST`
 - **Endpoint**: `/registrasi`
-- **Body**:
+- **Request Body**:
   ```json
   {
     "username": "string",
@@ -33,9 +35,9 @@ Aplikasi ini menggunakan backend CodeIgniter 4 dengan spesifikasi API sebagai be
 - **Response**: Token JWT
 
 #### 2. Login Member
-- **Method**: POST
+- **Method**: `POST`
 - **Endpoint**: `/login`
-- **Body**:
+- **Request Body**:
   ```json
   {
     "username": "string",
@@ -45,7 +47,7 @@ Aplikasi ini menggunakan backend CodeIgniter 4 dengan spesifikasi API sebagai be
 - **Response**: Token JWT
 
 #### 3. Get All Books
-- **Method**: GET
+- **Method**: `GET`
 - **Endpoint**: `/buku`
 - **Headers**: `Authorization: Bearer {token}`
 - **Response**:
@@ -70,16 +72,16 @@ Aplikasi ini menggunakan backend CodeIgniter 4 dengan spesifikasi API sebagai be
   ```
 
 #### 4. Get Book by ID
-- **Method**: GET
+- **Method**: `GET`
 - **Endpoint**: `/buku/{id}`
 - **Headers**: `Authorization: Bearer {token}`
 - **Response**: Single book object
 
 #### 5. Create Book
-- **Method**: POST
+- **Method**: `POST`
 - **Endpoint**: `/buku`
 - **Headers**: `Authorization: Bearer {token}`
-- **Body**:
+- **Request Body**:
   ```json
   {
     "judul": "string",
@@ -94,42 +96,40 @@ Aplikasi ini menggunakan backend CodeIgniter 4 dengan spesifikasi API sebagai be
 - **Response**: Created book object
 
 #### 6. Update Book
-- **Method**: PUT
+- **Method**: `PUT`
 - **Endpoint**: `/buku/{id}`
 - **Headers**: `Authorization: Bearer {token}`
-- **Body**: Same as create
+- **Request Body**: Same as create
 - **Response**: Updated book object
 
 #### 7. Delete Book
-- **Method**: DELETE
+- **Method**: `DELETE`
 - **Endpoint**: `/buku/{id}`
 - **Headers**: `Authorization: Bearer {token}`
 - **Response**: Success message
 
-## Penjelasan Kode
-
-### Struktur Aplikasi
+## Struktur Aplikasi
 
 ```
 lib/
-├── main.dart              # Entry point aplikasi
+├── main.dart                 # Entry point aplikasi
 ├── models/
-│   └── book.dart          # Model data buku dan response
+│   └── book.dart             # Model data buku dan response
 ├── services/
-│   ├── auth_service.dart  # Service untuk autentikasi
-│   └── book_service.dart  # Service untuk operasi buku
+│   ├── auth_service.dart     # Service untuk autentikasi
+│   └── book_service.dart     # Service untuk operasi buku
 └── screens/
-    ├── login_screen.dart      # Halaman login
-    ├── registration_screen.dart # Halaman registrasi
-    ├── book_list_screen.dart  # Halaman list buku
-    ├── add_book_screen.dart   # Halaman tambah buku
-    ├── update_book_screen.dart # Halaman update buku
-    └── book_detail_screen.dart # Halaman detail buku
+    ├── login_screen.dart         # Halaman login
+    ├── registration_screen.dart  # Halaman registrasi
+    ├── book_list_screen.dart     # Halaman list buku
+    ├── add_book_screen.dart      # Halaman tambah buku
+    ├── update_book_screen.dart   # Halaman update buku
+    └── book_detail_screen.dart   # Halaman detail buku
 ```
 
-### Penjelasan Tiap Fungsi
+## Penjelasan Kode
 
-#### 1. main.dart
+### 1. main.dart - Entry Point
 ```dart
 void main() {
   runApp(const MyApp());
@@ -151,9 +151,9 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-Fungsi utama untuk menjalankan aplikasi dengan tema coklat dan routing otomatis berdasarkan status login.
+**Fungsi**: Menjalankan aplikasi dengan tema coklat dan routing otomatis berdasarkan status login.
 
-#### 2. AuthWrapper (dalam main.dart)
+### 2. AuthWrapper - Authentication Check
 ```dart
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
@@ -192,9 +192,9 @@ class _AuthWrapperState extends State<AuthWrapper> {
   }
 }
 ```
-Komponen untuk mengecek status login dan menampilkan halaman yang sesuai.
+**Fungsi**: Mengecek status login dan menampilkan halaman yang sesuai.
 
-#### 3. AuthService (auth_service.dart)
+### 3. AuthService - Authentication Service
 ```dart
 class AuthService {
   Future<String?> getToken() async {
@@ -222,9 +222,9 @@ class AuthService {
   }
 }
 ```
-Service untuk menangani autentikasi, penyimpanan token, dan komunikasi dengan API auth.
+**Fungsi**: Menangani autentikasi, penyimpanan token, dan komunikasi dengan API auth.
 
-#### 4. BookService (book_service.dart)
+### 4. BookService - Book Operations Service
 ```dart
 class BookService {
   Future<Map<String, String>> _getHeaders() async {
@@ -252,15 +252,15 @@ class BookService {
   }
 }
 ```
-Service untuk semua operasi CRUD pada buku dengan penanganan error yang robust.
+**Fungsi**: Service untuk semua operasi CRUD pada buku dengan penanganan error yang robust.
 
-#### 5. Book Model (book.dart)
+### 5. Book Model - Data Models
 ```dart
 class Book {
   // Properties: id, judul, harga, jumlah, tanggalMasuk, volume, penulis, penerbit, createdAt, updatedAt
 
   Book.fromJson(Map<String, dynamic> json) {
-    // Parsing dari JSON API
+    // Parsing dari JSON API dengan handling aman
   }
 
   Map<String, dynamic> toJson() {
@@ -276,9 +276,9 @@ class BookResponse {
   }
 }
 ```
-Model data untuk buku dan response API dengan parsing yang aman.
+**Fungsi**: Model data untuk buku dan response API dengan parsing yang aman.
 
-#### 6. LoginScreen (login_screen.dart)
+### 6. LoginScreen - Login Page
 ```dart
 class _LoginScreenState extends State<LoginScreen> {
   Future<void> _login() async {
@@ -290,9 +290,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 ```
-Halaman login dengan form username dan password, validasi, dan navigasi.
+**Fungsi**: Halaman login dengan form username dan password, validasi, dan navigasi.
 
-#### 7. RegistrationScreen (registration_screen.dart)
+### 7. RegistrationScreen - Registration Page
 ```dart
 class _RegistrationScreenState extends State<RegistrationScreen> {
   Future<void> _register() async {
@@ -304,9 +304,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 }
 ```
-Halaman registrasi dengan validasi form dan navigasi ke login setelah berhasil.
+**Fungsi**: Halaman registrasi dengan validasi form dan navigasi ke login setelah berhasil.
 
-#### 8. BookListScreen (book_list_screen.dart)
+### 8. BookListScreen - Main Book List
 ```dart
 class _BookListScreenState extends State<BookListScreen> {
   Future<void> _loadBooks() async {
@@ -318,9 +318,9 @@ class _BookListScreenState extends State<BookListScreen> {
   }
 }
 ```
-Halaman utama menampilkan list buku dengan fitur refresh, delete, dan navigasi ke detail/add/update.
+**Fungsi**: Halaman utama menampilkan list buku dengan fitur refresh, delete, dan navigasi ke detail/add/update.
 
-#### 9. AddBookScreen (add_book_screen.dart)
+### 9. AddBookScreen - Add Book Form
 ```dart
 class _AddBookScreenState extends State<AddBookScreen> {
   Future<void> _addBook() async {
@@ -332,9 +332,9 @@ class _AddBookScreenState extends State<AddBookScreen> {
   }
 }
 ```
-Form untuk menambah buku baru dengan validasi dan feedback.
+**Fungsi**: Form untuk menambah buku baru dengan validasi dan feedback.
 
-#### 10. UpdateBookScreen (update_book_screen.dart)
+### 10. UpdateBookScreen - Update Book Form
 ```dart
 class _UpdateBookScreenState extends State<UpdateBookScreen> {
   Future<void> _updateBook() async {
@@ -346,9 +346,9 @@ class _UpdateBookScreenState extends State<UpdateBookScreen> {
   }
 }
 ```
-Form untuk mengupdate buku existing dengan pre-filled data.
+**Fungsi**: Form untuk mengupdate buku existing dengan pre-filled data.
 
-#### 11. BookDetailScreen (book_detail_screen.dart)
+### 11. BookDetailScreen - Book Details
 ```dart
 class BookDetailScreen extends StatelessWidget {
   // Menampilkan detail buku dengan layout yang menarik
@@ -357,34 +357,38 @@ class BookDetailScreen extends StatelessWidget {
   }
 }
 ```
-Halaman detail buku dengan tampilan yang informatif dan mudah dibaca.
+**Fungsi**: Halaman detail buku dengan tampilan yang informatif dan mudah dibaca.
 
 ## Cara Menjalankan
 
-1. **Setup Backend**:
-   ```bash
-   cd ci4_api
-   composer install
-   php spark serve
-   ```
+### Backend Setup
+```bash
+cd ci4_api
+composer install
+php spark serve
+```
 
-2. **Setup Frontend**:
-   ```bash
-   cd flutter_app/responsi_2_mobile_paket_3_h1d023021
-   flutter pub get
-   flutter run -d chrome
-   ```
+### Frontend Setup
+```bash
+cd flutter_app/responsi_2_mobile_paket_3_h1d023021
+flutter pub get
+flutter run -d chrome
+```
 
-3. **Database**: Import `database.sql` ke MySQL
-
+### Database
+Import `database.sql` ke MySQL
 
 ## Teknologi yang Digunakan
 
-- **Frontend**: Flutter, Dart
-- **Backend**: CodeIgniter 4, PHP
-- **Database**: MySQL
-- **State Management**: StatefulWidget
-- **HTTP Client**: http package
-- **Local Storage**: SharedPreferences
-#   r e s p o n s i - 2 - m o b i l e - p a k e t - 3 - H 1 D 0 2 3 0 2 1  
- 
+| Komponen | Teknologi |
+|----------|-----------|
+| Frontend | Flutter, Dart |
+| Backend | CodeIgniter 4, PHP |
+| Database | MySQL |
+| State Management | StatefulWidget |
+| HTTP Client | http package |
+| Local Storage | SharedPreferences |
+
+---
+
+Dibuat oleh Zaizafun Hanifah Zainnur Hanun (H1D023021)
